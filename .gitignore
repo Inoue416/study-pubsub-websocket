@@ -1,87 +1,49 @@
-##############
-#  Original  #
-##############
-
-# directory structure
-bin/*
-pkg/*
-!.gitkeep
-
-# goop - go package manager
-.vendor
-
-
-
-#############################
-#  $ gibo Go JetBrains OSX  #
-#############################
-
-### https://raw.github.com/github/gitignore/5a339cce0d8ccac36e71b077ef39a55c682d6d91/Go.gitignore
-
-# Compiled Object files, Static and Dynamic libs (Shared Objects)
-*.o
-*.a
-*.so
-
-# Folders
-_obj
-_test
-
-# Architecture specific extensions/prefixes
-*.[568vq]
-[568vq].out
-
-*.cgo1.go
-*.cgo2.c
-_cgo_defun.c
-_cgo_gotypes.go
-_cgo_export.*
-
-_testmain.go
-
+# Binaries for programs and plugins
 *.exe
+*.dll
+*.so
+*.dylib
 *.test
-*.prof
 
+# Output of the 'go tool' command
+_tool
 
-### https://raw.github.com/github/gitignore/5a339cce0d8ccac36e71b077ef39a55c682d6d91/Global/JetBrains.gitignore
-
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
-
-/*.iml
-
-## Directory-based project format:
+# Directory for IDE and editor-specific settings
+.vscode/
 .idea/
 
-## File-based project format:
+# Go workspace
+go.work
+go.work.sum
+
+# Dependencies
+vendor/
+
+# IDE specific settings
+*.iml
 *.ipr
 *.iws
 
-## Plugin-specific files:
+# Vim swap files
+.*.swp
 
-# IntelliJ
-out/
+# Emacs
+*~
 
+# Go build and test artifacts
+*.out
+*.test
+*.prof
 
-### https://raw.github.com/github/gitignore/5a339cce0d8ccac36e71b077ef39a55c682d6d91/Global/OSX.gitignore
+# Log files
+*.log
 
+# OS-specific files
 .DS_Store
-.AppleDouble
-.LSOverride
+Thumbs.db
 
-# Icon must end with two \r
-Icon
+# Private key files
+*.key
 
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+# Environment variables file
+.env
