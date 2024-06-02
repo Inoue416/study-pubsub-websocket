@@ -1,24 +1,36 @@
 package websocket
 
+type Subscription struct {
+	Topic  string
+	Client *Client
+}
+
 type Rooms struct {
-	Clients []*Client
+	Subscriptions []*Subscription
 }
 
-func (rooms *Rooms) AddClient(client *Client) {
-	rooms.Clients = append(rooms.Clients, client)
+func (rooms *Rooms) AddSubscription(subscription *Subscription) {
+	rooms.Subscriptions = append(rooms.Subscriptions, subscription)
 }
 
-func (room *Rooms) GetClient() []Client {
-	var cs []Client
+func (room *Rooms) GetSubscription(topic string) []Subscription {
+	var subs []Subscription
 
-	for _, client := range room.Clients {
-		cs = append(cs, *client)
+	for _, sub := range room.Subscriptions {
+		if sub.Topic == topic {
+			subs = append(subs, *sub)
+		}
 	}
-	return cs
+	return subs
 }
 
-func (room *Rooms) Publish(msg []byte) {
-	for _, client := range room.Clients {
-		client.Send(msg)
+func (room *Rooms) Publish(msg []byte, topic string) {
+	subs := room.GetSubscription(topic)
+
+	for _, sub := range subs {
+		err := sub.Client.Send(msg)
+		if err != nil {
+			return
+		}
 	}
 }

@@ -1,6 +1,7 @@
 package websocket
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -13,6 +14,8 @@ var upgrader = websocket.Upgrader{}
 var rooms = Rooms{}
 
 func ServeWs(c *gin.Context) error {
+	topic := c.Param("topic") // Get Url Param
+	fmt.Printf("\n\nTopic Param: %s\n\n", topic)
 	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
 	ws, err := upgrader.Upgrade(c.Writer, c.Request, nil)
 	if err != nil {
@@ -25,7 +28,10 @@ func ServeWs(c *gin.Context) error {
 		Ws: ws,
 	}
 
-	rooms.AddClient(client)
+	rooms.AddSubscription(&Subscription{
+		Topic:  topic,
+		Client: client,
+	})
 
 	for {
 		_, msg, err := ws.ReadMessage()
@@ -34,7 +40,7 @@ func ServeWs(c *gin.Context) error {
 			break
 		}
 
-		rooms.Publish(msg)
+		rooms.Publish(msg, topic)
 	}
 	return nil
 }
