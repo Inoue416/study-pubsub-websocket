@@ -1,4 +1,4 @@
-module study-pubsub
+module study-pubsub-websocket
 
 go 1.22.2
 

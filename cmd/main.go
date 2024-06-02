@@ -1,7 +1,8 @@
 package main
 
 import (
-	"github.com/Inoue416/study-pubsub-websocket.git/websocket" // 追加
+	"study-websocket-pubsub/websocket"
+
 	"github.com/gin-gonic/gin"
 )
 
